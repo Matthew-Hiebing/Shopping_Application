@@ -19,5 +19,5 @@ class UsersRepository {
 
 }
 
-new UsersRepository('users.json');
+const repo = new UsersRepository('users.json');
 
