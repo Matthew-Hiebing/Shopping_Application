@@ -82,9 +82,6 @@ class UsersRepository {
     }
 }
 
-const test = async () => {
-    const repo = new UsersRepository('users.json');
-    await repo.update('3046671a', { password: 'mypassword' });
-};
+module.exports = new UsersRepository('users.json');
 
-test();
+
