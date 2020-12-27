@@ -11,7 +11,7 @@ app.use(cookieSession({
   keys: ['dsfdsafdasfdf35kd32']
 }))
 
-app.get('/', (req, res) => {
+app.get('/signup', (req, res) => {
     res.send(`
     <div>
       Your id is: ${req.session.userID}
@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
   `);
 });
 
-app.post('/', async (req, res) => {
+app.post('/signup', async (req, res) => {
     const { email, password, passwordConfirmation } = req.body;
     const existingUser = await usersRepo.getOneBy({ email: email });
     if (existingUser) {
@@ -45,6 +45,39 @@ app.post('/', async (req, res) => {
     req.session.userID === user.id; //Added by cookie session.
 
 });
+
+app.get('/signout', (req, res) => {
+  req.session = null;
+  res.send('You are logged out')
+})
+
+app.get('/signin', (req, res) => {
+  res.send(`
+  <div>
+      <form method="POST">
+        <input name="email" placeholder="email" />
+        <input name="password" placeholder="password" />
+        <input name="passwordConfirmation" placeholder="password confirmation" />
+        <button>Sign In</button>
+      </form>
+  </div>
+  `)
+})
+
+app.post('/signin', async (req, res) => {
+  const { email, password } = req.body;
+  const user = await usersRepo.getOneBy( { email: email } );
+
+  if (!user) {
+    return res.send('Email not found');
+  }
+  if (user.password !== password) {
+    return res.send ('Invalid password');
+  }
+  req.session.userID = user.id;
+
+  res.send('You are signed in!!!');
+})
 
 app.listen(3000, () => {
     console.log('Listening');
