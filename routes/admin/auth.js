@@ -47,6 +47,11 @@ router.post('/signin',
     [requireEmailExists, requireValidPasswordForUser],
     async (req, res) => {
         const errors = validationResult(req);
+
+        if (!errors.isEmpty()) {
+            return res.send(signinTemplate({ errors: errors }));
+        }
+
         const { email } = req.body;
         const user = await usersRepo.getOneBy({ email: email });
 
