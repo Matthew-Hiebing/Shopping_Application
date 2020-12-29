@@ -14,7 +14,8 @@ const {
 
 const router = express.Router();
 
-router.get('/signup', (req, res) => {
+router.get(
+    '/signup', (req, res) => {
     res.send(signupTemplate({ req }));
 });
 
@@ -32,12 +33,14 @@ router.post(
     }
 );
 
-router.get('/signout', (req, res) => {
+router.get(
+    '/signout', (req, res) => {
     req.session = null;
     res.send('You are logged out');
 });
 
-router.get('/signin', (req, res) => {
+router.get(
+    '/signin', (req, res) => {
     res.send(signinTemplate({}));
 });
 
