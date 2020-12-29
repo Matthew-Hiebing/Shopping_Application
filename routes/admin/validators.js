@@ -6,18 +6,18 @@ module.exports = {
         .trim()
         .isLength({ min: 5, max: 40 })
         .withMessage('Must be between 5 and 40 characters'),
-        requirePrice: check('price')
+    requirePrice: check('price')
         .trim()
         .toFloat()
         .isFloat({ min: 1 })
-        .withMessage('Must be a number greater than one.'),
+        .withMessage('Must be a number greater than 1'),
     requireEmail: check('email')
         .trim()
         .normalizeEmail()
         .isEmail()
-        .withMessage('Must be between 4 and 20 characters')
-        .custom(async (email) => {
-            const existingUser = await usersRepo.getOneBy({ email: email });
+        .withMessage('Must be a valid email')
+        .custom(async email => {
+            const existingUser = await usersRepo.getOneBy({ email });
             if (existingUser) {
                 throw new Error('Email in use');
             }
@@ -30,8 +30,8 @@ module.exports = {
         .trim()
         .isLength({ min: 4, max: 20 })
         .withMessage('Must be between 4 and 20 characters')
-        .custom((passwordConfirmation, { req }) => {
-            if (password !== req.body.password) {
+        .custom(async (passwordConfirmation, { req }) => {
+            if (passwordConfirmation !== req.body.password) {
                 throw new Error('Passwords must match');
             }
         }),
@@ -40,8 +40,8 @@ module.exports = {
         .normalizeEmail()
         .isEmail()
         .withMessage('Must provide a valid email')
-        .custom(async (email) => {
-            const user = await usersRepo.getOneBy({ email: email })
+        .custom(async email => {
+            const user = await usersRepo.getOneBy({ email });
             if (!user) {
                 throw new Error('Email not found!');
             }
@@ -53,6 +53,7 @@ module.exports = {
             if (!user) {
                 throw new Error('Invalid password');
             }
+
             const validPassword = await usersRepo.comparePasswords(
                 user.password,
                 password
@@ -61,4 +62,4 @@ module.exports = {
                 throw new Error('Invalid password');
             }
         })
-}
+};
