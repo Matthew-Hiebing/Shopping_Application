@@ -1,6 +1,6 @@
 # Shopping_Application
 
-This project was put together to learn more about user creation, passwords, password validation, using express, and working with user created data.  The shopping applicatino mimicks a typical shopping website like Amazon or eBay but does not allow you to buy anything.  Products can be added, deleted, or updated in the user admin panel once you're logged in.  Pictures are stored as strings for now but should be stored on an online program.  Below is a screenshot from the prouducts page.
+This project was put together to learn more about user creation, passwords, password validation, using express, and working with user created data.  The shopping application mimicks a typical shopping website like Amazon or eBay but does not allow you to buy anything.  Products can be added, deleted, or updated in the user admin panel once you're logged in.  Pictures are stored as strings but in a production settting, should be stored on a server.  Below is a screenshot from the prouducts page.
 
 ![Imgur](https://i.imgur.com/fZgTZeT.png)
 
