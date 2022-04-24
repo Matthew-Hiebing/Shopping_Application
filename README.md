@@ -4,6 +4,10 @@ This project was put together to learn more about user creation, passwords, pass
 
 ![Imgur](https://i.imgur.com/fZgTZeT.png)
 
+A live demo of this app is hosted on Heroku.  Click the link below to try it out.
+
+[https://ski-shoppers.herokuapp.com/](https://ski-shoppers.herokuapp.com/)
+
 ## Installation
 ```bash
 npm install express-validator # Provides validators for username, passwords, etc.
