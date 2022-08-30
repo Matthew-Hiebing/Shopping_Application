@@ -16,7 +16,7 @@ module.exports = {
         .normalizeEmail()
         .isEmail()
         .withMessage('Must be a valid email')
-        .custom(async email => {
+        .custom(async (email) => {
             const existingUser = await usersRepo.getOneBy({ email });
             if (existingUser) {
                 throw new Error('Email in use');
@@ -40,7 +40,7 @@ module.exports = {
         .normalizeEmail()
         .isEmail()
         .withMessage('Must provide a valid email')
-        .custom(async email => {
+        .custom(async (email) => {
             const user = await usersRepo.getOneBy({ email });
             if (!user) {
                 throw new Error('Email not found!');
@@ -61,5 +61,5 @@ module.exports = {
             if (!validPassword) {
                 throw new Error('Invalid password');
             }
-        })
+        }),
 };
