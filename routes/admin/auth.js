@@ -9,7 +9,7 @@ const {
     requirePassword,
     requirePasswordConfirmation,
     requireEmailExists,
-    requireValidPasswordForUser
+    requireValidPasswordForUser,
 } = require('./validators');
 
 const router = express.Router();

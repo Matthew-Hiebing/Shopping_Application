@@ -50,7 +50,7 @@ router.post(
     requireAuth,
     upload.single('image'),
     [requireTitle, requirePrice],
-    handleErrors(productsEditTemplate, async req => {
+    handleErrors(productsEditTemplate, async (req) => {
         const product = await productsRepo.getOne(req.params.id);
         return { product };
     }),
